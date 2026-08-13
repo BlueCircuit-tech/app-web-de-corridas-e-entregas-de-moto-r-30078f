@@ -240,6 +240,260 @@
     </script>
 </section>
 
+    <section data-tela="login-cadastro" class="hidden">
+        <div class="min-h-screen bg-white flex flex-col">
+            <!-- Header -->
+            <div class="bg-black px-5 pt-8 pb-5 rounded-b-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <button onclick="mostrarTela('selecao-de-perfil')" class="text-white p-1 -ml-1 active:scale-90 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-8 h-8 text-red-600" viewBox="0 0 64 64" fill="currentColor">
+                            <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <circle cx="20" cy="38" r="6"/><circle cx="44" cy="38" r="6"/>
+                            <path d="M18 38h4v-8c0-2 2-4 4-4h8c2 0 4 2 4 4v8h4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="32" cy="22" r="5"/><line x1="32" y1="22" x2="32" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="text-white font-bold text-lg tracking-tight">Rota Express</span>
+                    </div>
+                    <div class="w-8"></div>
+                </div>
+                <p class="text-gray-400 text-sm text-center font-light">Entregas rápidas e seguras</p>
+            </div>
+
+            <!-- Toggle Login / Cadastro -->
+            <div class="flex mx-5 mt-5 bg-gray-100 rounded-xl p-1">
+                <button id="btn-tab-login" onclick="login_cadastro_alternarTab('login')" class="flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-black text-white shadow-sm">Entrar</button>
+                <button id="btn-tab-cadastro" onclick="login_cadastro_alternarTab('cadastro')" class="flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all text-gray-500">Cadastrar</button>
+            </div>
+
+            <!-- Badge de perfil -->
+            <div id="badge-perfil" class="mx-5 mt-4 px-3 py-2 rounded-lg flex items-center gap-2 text-sm font-medium bg-red-50 text-red-700 border border-red-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.25h15a1.5 1.5 0 001.5-1.5V19a5.25 5.25 0 00-10.5 0v-.75a1.5 1.5 0 00-1.5-1.5H4.5z"/></svg>
+                <span id="texto-badge-perfil">Perfil: Cliente</span>
+            </div>
+
+            <!-- Formulário LOGIN -->
+            <form id="form-login" class="flex-1 px-5 mt-5 space-y-4 overflow-y-auto pb-6" onsubmit="event.preventDefault();">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Telefone ou E-mail</label>
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H4.5A2.25 2.25 0 002.25 6v11.25A2.25 2.25 0 004.5 19.5z"/></svg>
+                        <input type="text" placeholder="(11) 99999-9999" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition" />
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Senha</label>
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+                        <input type="password" placeholder="••••••••" class="w-full pl-11 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition" />
+                        <button type="button" onclick="login_cadastro_toggleSenha(this)" class="absolute right-3 top-3 text-gray-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" onclick="login_cadastro_fazerLogin()" class="w-full bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-red-200 mt-2">
+                    Entrar
+                </button>
+                <p class="text-center text-xs text-gray-400 mt-3">
+                    Esqueceu a senha? <button type="button" class="text-red-600 font-medium">Recuperar</button>
+                </p>
+            </form>
+
+            <!-- Formulário CADASTRO -->
+            <form id="form-cadastro" class="hidden flex-1 px-5 mt-5 space-y-4 overflow-y-auto pb-6" onsubmit="event.preventDefault();">
+                <!-- Nome completo -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Nome completo</label>
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.25h15a1.5 1.5 0 001.5-1.5V19a5.25 5.25 0 00-10.5 0v-.75a1.5 1.5 0 00-1.5-1.5H4.5z"/></svg>
+                        <input id="cad-nome" type="text" placeholder="Seu nome completo" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition" />
+                    </div>
+                </div>
+                <!-- Telefone -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Telefone</label>
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.04 12.04 0 01-7.143-7.143c-.162-.441.004-.928.38-1.211l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                        <input id="cad-telefone" type="tel" placeholder="(11) 99999-9999" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition" />
+                    </div>
+                </div>
+                <!-- E-mail -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">E-mail</label>
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                        <input id="cad-email" type="email" placeholder="seu@email.com" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition" />
+                    </div>
+                </div>
+                <!-- Senha -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1.5">Criar senha</label>
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+                        <input id="cad-senha" type="password" placeholder="Mínimo 6 caracteres" class="w-full pl-11 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition" />
+                        <button type="button" onclick="login_cadastro_toggleSenha(this)" class="absolute right-3 top-3 text-gray-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Campos exclusivos do Motorista -->
+                <div id="campos-motorista" class="hidden space-y-4 pt-2">
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-3.5">
+                        <p class="text-xs font-semibold text-red-700 mb-3 flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+                            Dados do veículo
+                        </p>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-medium text-red-800 mb-1">Tipo de veículo</label>
+                                <select id="cad-tipo-veiculo" class="w-full px-3 py-2.5 bg-white border border-red-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+                                    <option value="">Selecione...</option>
+                                    <option value="moto">Moto</option>
+                                    <option value="moto-carga">Moto de Carga</option>
+                                    <option value="bike">Bicicleta</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-red-800 mb-1">Modelo da moto</label>
+                                <input id="cad-modelo" type="text" placeholder="Ex: Honda CG 160 Fan" class="w-full px-3 py-2.5 bg-white border border-red-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-red-800 mb-1">Placa</label>
+                                <input id="cad-placa" type="text" placeholder="ABC-1234" maxlength="8" class="w-full px-3 py-2.5 bg-white border border-red-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 uppercase" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-red-800 mb-1">CNH</label>
+                                <input id="cad-cnh" type="text" placeholder="Número da CNH" class="w-full px-3 py-2.5 bg-white border border-red-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" onclick="login_cadastro_fazerCadastro()" class="w-full bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-red-200 mt-2">
+                    Criar Conta
+                </button>
+            </form>
+
+            <!-- Toast de sucesso -->
+            <div id="toast-login-cadastro" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-3 rounded-xl text-sm font-medium shadow-2xl opacity-0 pointer-events-none transition-all duration-300 translate-y-4 z-50 flex items-center gap-2">
+                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span id="toast-msg-login-cadastro"></span>
+            </div>
+        </div>
+    </section>
+    <script>
+        let login_cadastro_tipoPerfil = 'cliente';
+
+        function login_cadastro_alternarTab(tab) {
+            const btnLogin = document.getElementById('btn-tab-login');
+            const btnCadastro = document.getElementById('btn-tab-cadastro');
+            const formLogin = document.getElementById('form-login');
+            const formCadastro = document.getElementById('form-cadastro');
+            if (tab === 'login') {
+                btnLogin.className = 'flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-black text-white shadow-sm';
+                btnCadastro.className = 'flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all text-gray-500';
+                formLogin.classList.remove('hidden');
+                formCadastro.classList.add('hidden');
+            } else {
+                btnCadastro.className = 'flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-black text-white shadow-sm';
+                btnLogin.className = 'flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all text-gray-500';
+                formCadastro.classList.remove('hidden');
+                formLogin.classList.add('hidden');
+            }
+        }
+
+        function login_cadastro_setPerfil(tipo) {
+            login_cadastro_tipoPerfil = tipo;
+            const badge = document.getElementById('badge-perfil');
+            const texto = document.getElementById('texto-badge-perfil');
+            const camposMoto = document.getElementById('campos-motorista');
+            if (tipo === 'motorista') {
+                badge.className = 'mx-5 mt-4 px-3 py-2 rounded-lg flex items-center gap-2 text-sm font-medium bg-yellow-50 text-yellow-700 border border-yellow-200';
+                texto.textContent = 'Perfil: Motorista';
+                camposMoto.classList.remove('hidden');
+            } else {
+                badge.className = 'mx-5 mt-4 px-3 py-2 rounded-lg flex items-center gap-2 text-sm font-medium bg-red-50 text-red-700 border border-red-200';
+                texto.textContent = 'Perfil: Cliente';
+                camposMoto.classList.add('hidden');
+            }
+        }
+
+        function login_cadastro_toggleSenha(btn) {
+            const input = btn.parentElement.querySelector('input');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243l4.242 4.242z"/></svg>';
+            } else {
+                input.type = 'password';
+                btn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
+            }
+        }
+
+        function login_cadastro_fazerLogin() {
+            const telefone = document.querySelector('#form-login input[type="text"]');
+            const senha = document.querySelector('#form-login input[type="password"]');
+            if (!telefone.value.trim()) {
+                telefone.classList.add('ring-2', 'ring-red-400');
+                telefone.focus();
+                setTimeout(() => telefone.classList.remove('ring-2', 'ring-red-400'), 2000);
+                return;
+            }
+            if (login_cadastro_tipoPerfil === 'motorista') {
+                mostrarTela('novos-pedidos-motorista');
+            } else {
+                mostrarTela('solicitar-corrida-entrega-cliente');
+            }
+            login_cadastro_mostrarToast('Login realizado com sucesso!');
+        }
+
+        function login_cadastro_fazerCadastro() {
+            const nome = document.getElementById('cad-nome');
+            const telefone = document.getElementById('cad-telefone');
+            const email = document.getElementById('cad-email');
+            const senha = document.getElementById('cad-senha');
+            let valido = true;
+            [nome, telefone, email, senha].forEach(el => {
+                if (!el.value.trim()) {
+                    el.classList.add('ring-2', 'ring-red-400');
+                    valido = false;
+                    setTimeout(() => el.classList.remove('ring-2', 'ring-red-400'), 2000);
+                }
+            });
+            if (!valido) return;
+            if (senha.value.length < 6) {
+                login_cadastro_mostrarToast('A senha deve ter ao menos 6 caracteres.');
+                return;
+            }
+            if (login_cadastro_tipoPerfil === 'motorista') {
+                const tipoVeiculo = document.getElementById('cad-tipo-veiculo');
+                const modelo = document.getElementById('cad-modelo');
+                const placa = document.getElementById('cad-placa');
+                const cnh = document.getElementById('cad-cnh');
+                if (!tipoVeiculo.value || !modelo.value.trim() || !placa.value.trim() || !cnh.value.trim()) {
+                    login_cadastro_mostrarToast('Preencha todos os dados do veículo.');
+                    return;
+                }
+            }
+            login_cadastro_mostrarToast('Conta criada! Faça login para continuar.');
+            setTimeout(() => login_cadastro_alternarTab('login'), 1500);
+        }
+
+        function login_cadastro_mostrarToast(msg) {
+            const toast = document.getElementById('toast-login-cadastro');
+            const txt = document.getElementById('toast-msg-login-cadastro');
+            txt.textContent = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 2500);
+        }
+    </script>
+
     <!-- TELAS -->
         </main>
 
